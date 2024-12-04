@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  email     String   @unique
-  password  String
-  rol       String
-  status    String   @default("PENDING")
-  createdAt DateTime @default(now())
+  id                 Int       @id @default(autoincrement())
+  name               String    @unique
+  email              String    @unique
+  password           String
+  rol                String
+  status             String    @default("PENDING")
+  createdAt          DateTime  @default(now())
+  passwordResetToken String?   // Token para restablecer la contraseña
+  tokenExpiry        DateTime? // Fecha de expiración del token
 }

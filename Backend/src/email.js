@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-// Configuración del transportador de Nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -29,4 +28,24 @@ export const sendVerificationEmail = (email, verificationToken) => {
       console.log('Correo enviado:', info.response)
     }
   })
+}
+
+export const sendPasswordEmail = (email, Token) => {  
+  const verifyUrlPassword = `http://localhost:3000/users/change-password?token=${Token}`;
+
+  const mailOptionsPassword = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'estas seguro que quieres cambiar tu password?',
+    html: `<p>Haz clic en el siguiente enlace para cambiar tu password:</p><a href="${verifyUrlPassword}">${verifyUrlPassword}</a>`
+  }
+
+  transporter.sendMail(mailOptionsPassword, (error, info) => {
+    if (error) {
+      console.error('Error al enviar correo:', error)
+    } else {
+      console.log('Correo enviado:', info.response)
+    }
+  })
+
 }

@@ -38,6 +38,6 @@ export const register = async (req, res) => {
 
   sendVerificationEmail(newUser.email, token)
 
-  res.status(201).json({ message: 'Usuario creado correctamente , inicie sesion y verifique su email', token })
+  res.status(201).json({ message: 'Usuario creado correctamente , porfavor verifique', token })
   console.log('creado')
 }
