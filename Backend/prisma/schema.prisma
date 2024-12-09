@@ -15,6 +15,6 @@ model User {
   rol                String
   status             String    @default("PENDING")
   createdAt          DateTime  @default(now())
-  passwordResetToken String?   // Token para restablecer la contraseña
-  tokenExpiry        DateTime? // Fecha de expiración del token
+  passwordResetToken String?   
+  tokenExpiry        DateTime? 
 }

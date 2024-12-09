@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { PrismaClient } from '@prisma/client'
 
+
+
 const prisma = new PrismaClient()
 
 export const verifyEmail = async (token) => {
@@ -26,3 +28,18 @@ export const verifyEmail = async (token) => {
     return { success: false, message: 'Token inválido o expirado' }
   }
 }
+
+export const verifyEmailController = async (req, res) => {
+  const { token } = req.query;
+
+  if (!token) {
+    return res.status(400).json({ message: 'Token no proporcionado' });
+  }
+
+  try {
+    await verifyEmail(token);
+    return res.status(200).json({ message: 'Correo electrónico verificado con éxito.' });
+  } catch (error) {
+    return res.status(400).json({ message: 'Token inválido o expirado.' });
+  }
+};
